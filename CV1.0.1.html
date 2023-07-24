@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>A Letter</title>
+  <style>
+    body {
+      font-family: Lucida Handwriting, cursive;
+      text-align: center;
+      margin: 30px;
+      background-color: pink;
+    }
+
+    h1 {
+      color: #ff6b6c;
+    }
+
+    #loading-screen {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle, #ffefcc, #ffbbbc);
+      animation: fadeIn 1.5s ease-out;
+      z-index: 9999;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    #open-letter-btn {
+      padding: 10px 30px;
+      font-size: 16px;
+      background-color: #ff6b6b;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    #open-letter-btn:hover {
+      background-color: #ff4545;
+    }
+
+    #confession-container {
+      background-image: radial-gradient(circle, #ffefcc, #ffbbbc);
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      display: none;
+    }
+
+    .confession-paragraph {
+      overflow: hidden;
+      white-space: nowrap;
+      display: inline-block;
+      animation: typing 3s steps(40, end), blink-caret 0.5s step-end infinite;
+    }
+
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+    }
+
+    @keyframes blink-caret {
+      from,
+      to {
+        border-color: transparent;
+      }
+      50% {
+        border-color: #000;
+      }
+    }
+  </style>
+</head>
+<body>
+<audio id="cuteLoopSound" loop>
+    <!-- Replace "cute-loop-sound.mp3" with the path to your audio file -->
+    <source src="element/cookie.mp3" type="audio/mpeg">
+    <!-- Add more source elements with different formats if needed for cross-browser support -->
+    <!-- <source src="cute-loop-sound.ogg" type="audio/ogg"> -->
+    <!-- <source src="cute-loop-sound.wav" type="audio/wav"> -->
+
+  </audio>
+  <div id="loading-screen">
+    <h1>To ANGELA<3</h1>
+    <button id="open-letter-btn">Open the Letter</button>
+  </div>
+  <div id="confession-container">
+    <h1>Hello Angela!</h1>
+    <p class="confession-paragraph">I hope you're doing well.</p>
+    <p class="confession-paragraph">There's something important I need to tell you.</p>
+    <p class="confession-paragraph">Ever since we stopped talking, I've realized how much you mean to me.</p>
+    <p class="confession-paragraph">I've become fond of you, and I can't keep it to myself any longer.</p>
+    <p class="confession-paragraph">I think of you time to time, and I wanted you to know that.</p>
+    <p class="confession-paragraph">I understand if this comes as a surprise, but I wanted to be honest with you.</p>
+    <p class="confession-paragraph">Please take your time to process this, and I'm here if you want to talk.</p>
+    <p class="confession-paragraph">Thank You!</p>
+    <p class="confession-paragraph">Sincerely,</p>
+    <p class="confession-paragraph">Dray:></p>
+  </div>
+  <script>
+  
+  document.getElementById("open-letter-btn").addEventListener("click", function () {
+      // Play the cute loop sound upon button click
+      var cuteLoopSound = document.getElementById("cuteLoopSound");
+      cuteLoopSound.play();
+
+      // Hide the loading screen and show the confession message
+      document.getElementById("loading-screen").style.display = "none";
+      document.getElementById("confession-container").style.display = "block";
+      animateParagraphs();
+    });
+
+    function animateParagraphs() {
+      var paragraphs = document.getElementsByClassName("confession-paragraph");
+      for (var i = 0; i < paragraphs.length; i++) {
+        animateParagraph(paragraphs[i], i);
+      }
+    }
+
+    function animateParagraph(paragraph, index) {
+      var text = paragraph.innerText;
+      paragraph.innerText = "";
+
+      var delay = index * 500; // Add a delay between each paragraph animation
+
+      setTimeout(function () {
+        var charIndex = 0;
+        var interval = setInterval(function () {
+          if (charIndex <= text.length) {
+            paragraph.innerText = text.substr(0, charIndex);
+            charIndex++;
+          } else {
+            clearInterval(interval);
+          }
+        }, 200); // Change the delay here to control the typing speed
+      }, delay);
+    }
+  </script>
+</body>
+</html>
